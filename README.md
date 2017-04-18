@@ -1,22 +1,24 @@
-Role Name
-=========
+teamix.openssh
+==============
 
-A brief description of the role goes here.
+This role configures and (massively) hardens OpenSSH. This is done by updating hostkeys and sshd_config and ssh_config to best practices layed out by "Secure Secure Shell" (https://stribika.github.io/2015/01/04/secure-secure-shell.html).
+
+NOTE: the ssh_config file will simply disable password based authentication for the client! So if you get "Permission denied (password, publickey)" or similar try "ssh -o PasswordAuthetication=yes"
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Uses a default config, which can be found in defaults/main.yml. Basically it just provides mattwillsher.ssh with some harsh defaults and runs with it.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+* mattwillsher.ssh
 
 Example Playbook
 ----------------
@@ -25,7 +27,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: teamix.openssh }
 
 License
 -------

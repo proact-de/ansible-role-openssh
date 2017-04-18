@@ -1,2 +1,36 @@
 ---
 # tasks file for teamix.openssh
+###
+# SSH Configuration - Hardening of Server
+# Configuration based on https://stribika.github.io/2015/01/04/secure-secure-shell.html
+###
+
+- name: Setup SSHd config (mattwillsher.sshd role)
+  include_role: name=mattwillsher.sshd
+
+# Check and replace hostkeys, if needed.
+# This will also update the local known_host file automagically ;-)
+# Goal: No RSA1 (Protocol Version 1) Key, No DSA key, RSA key of 4096 bits,
+#       no ECDSA key and an ED25519 key (128 Bits, not changeable)
+- name: Harden SSHd | remove RSA1 hostkey.
+  openssh_hostkey: type=RSA1 state=absent
+  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+- name: Harden SSHd | remove DSA hostkey.
+  openssh_hostkey: type=DSA state=absent
+  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+- name: Harden SSHd | Enforce 4096 bits RSA hostkey.
+  openssh_hostkey: type=RSA size=4096 state=present
+  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+- name: Harden SSHd | Enforce 521 bits ECDSA key.
+  openssh_hostkey: type=ECDSA state=absent
+  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+- name: Harden SSHd | Enforce existence of ED25519 hostkey.
+  openssh_hostkey: type=ED25519 size=128 state=present
+  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+
+- name: Harden SSHd | Deploy large RSA moduli.
+  copy: dest=/etc/ssh/moduli group=root  mode=0644  owner=root src=moduli.safe
+
+# Install a ssh_config with similar defaults to the SSHd config. Can always be overridden by user.
+- name: Harden SSH | Install ssh_config.
+  template: group=root mode=0644 owner=root dest=/etc/ssh/ssh_config src=ssh_config.j2
