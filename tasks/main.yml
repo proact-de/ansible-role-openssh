@@ -6,7 +6,7 @@
 ###
 
 - name: Setup SSHd config (mattwillsher.sshd role)
-  include_role: name=mattwillsher.sshd
+  include_role: name=willshersystems.sshd
 
 # Check and replace hostkeys, if needed.
 # This will also update the local known_host file automagically ;-)

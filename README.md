@@ -13,12 +13,12 @@ None.
 Role Variables
 --------------
 
-Uses a default config, which can be found in defaults/main.yml. Basically it just provides mattwillsher.ssh with some harsh defaults and runs with it.
+Uses a default config, which can be found in defaults/main.yml. Basically it just provides willshersystems.sshd with some harsh defaults and runs with it.
 
 Dependencies
 ------------
 
-* mattwillsher.ssh
+* willshersystems.sshd
 
 Example Playbook
 ----------------
