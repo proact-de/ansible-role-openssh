@@ -18,7 +18,7 @@ Uses a default config, which can be found in defaults/main.yml. Basically it jus
 Dependencies
 ------------
 
-* willshersystems.sshd
+  * willshersystems.sshd
 
 Example Playbook
 ----------------
@@ -37,4 +37,6 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Patrick Dreker, patrick.dreker@teamix.de
+Source Code: https://bitbucket.devops.lab.teamix.net:8443/cd/teamix.openssh.git
+(c) 2017 teamix GmbH
