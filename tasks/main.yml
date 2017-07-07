@@ -20,19 +20,19 @@
 #       no ECDSA key and an ED25519 key (128 Bits, not changeable)
 - name: Harden SSHd | remove RSA1 hostkey.
   openssh_hostkey: type=RSA1 state=absent
-  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+  notify: [ 'restart_sshd' ]
 - name: Harden SSHd | remove DSA hostkey.
   openssh_hostkey: type=DSA state=absent
-  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+  notify: [ 'restart_sshd' ]
 - name: Harden SSHd | Enforce 4096 bits RSA hostkey.
   openssh_hostkey: type=RSA size=4096 state=present
-  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+  notify: [ 'restart_sshd' ]
 - name: Harden SSHd | Enforce 521 bits ECDSA key.
   openssh_hostkey: type=ECDSA state=absent
-  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+  notify: [ 'restart_sshd' ]
 - name: Harden SSHd | Enforce existence of ED25519 hostkey.
   openssh_hostkey: type=ED25519 size=128 state=present
-  notify: [ 'restart_sshd', 'update_known_hosts1' ]
+  notify: [ 'restart_sshd' ]
 
 - name: Harden SSHd | Deploy large RSA moduli.
   copy: dest=/etc/ssh/moduli group=root  mode=0644  owner=root src=moduli.safe
