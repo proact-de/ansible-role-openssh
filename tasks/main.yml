@@ -12,7 +12,10 @@
     - "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
 
 - name: Setup SSHd config (mattwillsher.sshd role)
-  include_role: name=willshersystems.sshd
+  include_role:
+    name: willshersystems.sshd
+  vars: 
+    sshd: "{{ tmx_sshd }}"
 
 # Check and replace hostkeys, if needed.
 # This will also update the local known_host file automagically ;-)
