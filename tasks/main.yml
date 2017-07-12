@@ -11,35 +11,77 @@
     - "{{ ansible_os_family }}.yml"
     - "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
 
+- name: Include Installation procedures
+  include: install.yml
+
 - name: Setup SSHd config (mattwillsher.sshd role)
   include_role:
     name: willshersystems.sshd
-  vars: 
+  vars:
     sshd: "{{ tmx_sshd }}"
+
+- name: Disbale ECDSA key generation in rc.d/ssh
+  lineinfile:
+    dest: /etc/rc.conf
+    insertbefore: EOF
+    line: sshd_ecdsa_enable="no"
+    state: present
+  when: ansible_system == "FreeBSD"
 
 # Check and replace hostkeys, if needed.
 # This will also update the local known_host file automagically ;-)
 # Goal: No RSA1 (Protocol Version 1) Key, No DSA key, RSA key of 4096 bits,
 #       no ECDSA key and an ED25519 key (128 Bits, not changeable)
 - name: Harden SSHd | remove RSA1 hostkey.
-  openssh_hostkey: type=RSA1 state=absent
+  openssh_hostkey:
+    type: RSA1
+    state: absent
+    path: "{{ tmx_openssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
+
 - name: Harden SSHd | remove DSA hostkey.
-  openssh_hostkey: type=DSA state=absent
+  openssh_hostkey:
+    type: DSA
+    state: absent
+    path: "{{ tmx_openssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
+
 - name: Harden SSHd | Enforce 4096 bits RSA hostkey.
-  openssh_hostkey: type=RSA size=4096 state=present
+  openssh_hostkey:
+    type: RSA
+    size: 4096
+    state: present
+    path: "{{ tmx_openssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
+
 - name: Harden SSHd | Enforce 521 bits ECDSA key.
-  openssh_hostkey: type=ECDSA state=absent
+  openssh_hostkey:
+    type: ECDSA
+    state: absent
+    path: "{{ tmx_openssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
+
 - name: Harden SSHd | Enforce existence of ED25519 hostkey.
-  openssh_hostkey: type=ED25519 size=128 state=present
+  openssh_hostkey:
+    type: ED25519
+    size: 128
+    state: present
+    path: "{{ tmx_openssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
 
 - name: Harden SSHd | Deploy large RSA moduli.
-  copy: dest=/etc/ssh/moduli group=root  mode=0644  owner=root src=moduli.safe
+  copy:
+    dest: "{{ tmx_openssh_conf_dir }}/moduli"
+    group: "{{ root_group }}"
+    mode: 0644
+    owner: root
+    src: moduli.safe
 
 # Install a ssh_config with similar defaults to the SSHd config. Can always be overridden by user.
 - name: Harden SSH | Install ssh_config.
-  template: group=root mode=0644 owner=root dest=/etc/ssh/ssh_config src=ssh_config.j2
+  template:
+    group: "{{ root_group }}"
+    mode: 0644
+    owner: root
+    dest: "{{ tmx_openssh_conf_dir }}/ssh_config"
+    src: ssh_config.j2

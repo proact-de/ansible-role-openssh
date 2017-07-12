@@ -2,11 +2,15 @@
 # handlers file for teamix.openssh
 # handlers file for teamix.LinuxBase
 - name: restart_sshd
-  service: name=ssh state=restarted
+  service:
+    name: ssh
+    state: restarted
+
 - name: update_known_hosts1
   connection: local
   local_action: "known_hosts name={{ inventory_hostname }} state=absent"
   become: "no"
+
 - name: update_known_hosts2
   connection: local
   local_action: "shell ssh-keyscan -t rsa,ecdsa,ed25519 {{ inventory_hostname }} >> ~/.ssh/known_hosts"

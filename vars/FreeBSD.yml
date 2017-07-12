@@ -1,0 +1,6 @@
+---
+tmx_openssh_conf_dir: /etc/ssh
+pycrypto_package: py27-cryptography
+root_group: wheel
+ssh_service_name: sshd
+

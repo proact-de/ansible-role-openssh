@@ -6,10 +6,10 @@ tmx_sshd:
     - diffie-hellman-group-exchange-sha256
   Protocol: 2
   HostKey:
-    - /etc/ssh/ssh_host_rsa_key
-    - /etc/ssh/ssh_host_ed25519_key
+    - "{{ tmx_openssh_conf_dir }}/ssh_host_rsa_key"
+    - "{{ tmx_openssh_conf_dir }}/ssh_host_ed25519_key"
   PasswordAuthentication: "no"
-  PermitRootLogin: prohibit-password
+  PermitRootLogin: without-password
   ChallengeResponseAuthentication: "no"
   PubkeyAuthentication: "yes"
   AllowGroups: ssh_allow
