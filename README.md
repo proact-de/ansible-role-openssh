@@ -55,11 +55,11 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+internal
 
 Author Information
 ------------------
 
 Patrick Dreker, patrick.dreker@teamix.de
-Source Code: https://bitbucket.devops.lab.teamix.net:8443/cd/teamix.openssh.git
+Source Code: https://gitlab.nbg.teamix.net/ansible/teamix.openssh
 (c) 2017 teamix GmbH
