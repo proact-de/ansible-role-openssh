@@ -25,8 +25,8 @@ Uses a default config, which can be found in defaults/main.yml. Basically it jus
     - diffie-hellman-group-exchange-sha256
   Protocol: 2
   HostKey:
-    - "{{ tmx_openssh_conf_dir }}/ssh_host_rsa_key"
-    - "{{ tmx_openssh_conf_dir }}/ssh_host_ed25519_key"
+    - "{{ tmxopenssh_conf_dir }}/ssh_host_rsa_key"
+    - "{{ tmxopenssh_conf_dir }}/ssh_host_ed25519_key"
   PasswordAuthentication: "no"
   PermitRootLogin: without-password
   ChallengeResponseAuthentication: "no"
