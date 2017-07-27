@@ -3,7 +3,7 @@
 # handlers file for teamix.LinuxBase
 - name: restart_sshd
   service:
-    name: ssh
+    name: "{{ tmxopenssh_service_name }}"
     state: restarted
 
 - name: update_known_hosts1
