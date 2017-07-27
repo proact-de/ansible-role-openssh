@@ -1,8 +1,8 @@
 ---
 # defaults file for teamix.openssh
-ssh_allow_group: ssh_allow
+tmxopenssh_allow_group: ssh_allow
 
-tmx_sshd:
+tmxopenssh_sshd:
   KexAlgorithms:
     - curve25519-sha256@libssh.org
     - diffie-hellman-group-exchange-sha256
