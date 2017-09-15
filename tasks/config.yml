@@ -11,7 +11,7 @@
   vars:
     sshd: "{{ tmxopenssh_sshd }}"
 
-- name: Disbale ECDSA key generation in rc.d/ssh
+- name: Disable ECDSA key generation in rc.d/ssh
   lineinfile:
     dest: /etc/rc.conf
     insertbefore: EOF
