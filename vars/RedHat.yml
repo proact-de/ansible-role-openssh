@@ -1,0 +1,4 @@
+tmxopenssh_conf_dir: /etc/ssh
+tmxopenssh_pycrypto_package: python-cryptography
+root_group: root
+tmxopenssh_service_name: sshd
