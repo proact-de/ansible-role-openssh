@@ -20,9 +20,7 @@ Uses a default config, which can be found in defaults/main.yml. Basically it jus
  The default configuration is:
  ```
  tmx_sshd:
-  KexAlgorithms:
-    - curve25519-sha256@libssh.org
-    - diffie-hellman-group-exchange-sha256
+  KexAlgorithms: curve25519-sha256@libssh.org, diffie-hellman-group-exchange-sha256
   Protocol: 2
   HostKey:
     - "{{ tmxopenssh_conf_dir }}/ssh_host_rsa_key"
