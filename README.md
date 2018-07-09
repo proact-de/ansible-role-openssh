@@ -1,4 +1,4 @@
-teamix.openssh
+proactcloud.openssh
 ==============
 
 This role configures and (massively) hardens OpenSSH. This is done by updating hostkeys and sshd_config and ssh_config to best practices layed out by "Secure Secure Shell" (https://stribika.github.io/2015/01/04/secure-secure-shell.html).
@@ -48,7 +48,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: teamix.openssh, ssh_allow_group: mysshgrp }
+         - { role: proactcloud.openssh, ssh_allow_group: mysshgrp }
 
 License
 -------
@@ -58,6 +58,6 @@ internal
 Author Information
 ------------------
 
-Patrick Dreker, patrick.dreker@teamix.de
-Source Code: https://gitlab.nbg.teamix.net/ansible/teamix.openssh
-(c) 2017 teamix GmbH
+Patrick Dreker, patrick.dreker@proact.de
+Source Code: Proact Gitlab
+(c) 2017-2018 Proact Deutschland GmbH

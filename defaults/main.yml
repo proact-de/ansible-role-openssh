@@ -1,5 +1,5 @@
 ---
-# defaults file for teamix.openssh
+# defaults file for proactcloud.openssh
 tmxopenssh_allow_group: ssh_allow
 
 tmxopenssh_sshd:

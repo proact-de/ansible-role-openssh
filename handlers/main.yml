@@ -1,6 +1,6 @@
 ---
-# handlers file for teamix.openssh
-# handlers file for teamix.LinuxBase
+# handlers file for proactcloud.openssh
+# handlers file for proactcloud.LinuxBase
 - name: restart_sshd
   service:
     name: "{{ tmxopenssh_service_name }}"

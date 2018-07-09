@@ -1,5 +1,5 @@
 ---
-# tasks file for teamix.openssh
+# tasks file for proactcloud.openssh
 ###
 # SSH Configuration - Hardening of Server
 # Configuration based on https://stribika.github.io/2015/01/04/secure-secure-shell.html
