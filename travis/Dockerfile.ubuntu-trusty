@@ -8,5 +8,7 @@ RUN apt-add-repository -y ppa:ansible/ansible && apt-get update && apt-get insta
  && rm -rf /var/lib/apt/lists/*
 
 RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
+RUN mkdir -p /etc/ansible/modules
+COPY travis/openssh_hostkey.py /etc/ansible/modules/openssh_hostkey.py
 
 ENTRYPOINT ["/sbin/init"]

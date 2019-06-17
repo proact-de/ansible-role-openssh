@@ -14,5 +14,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
 RUN pip install --upgrade setuptools && pip install ansible
 
 RUN mkdir -p /etc/ansible && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
+RUN mkdir -p /etc/ansible/modules
+COPY travis/openssh_hostkey.py /etc/ansible/modules/openssh_hostkey.py
 
 ENTRYPOINT ["/bin/systemd"]
