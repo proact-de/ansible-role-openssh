@@ -28,7 +28,7 @@ script:
   - 'sudo docker cp travis/openssh_hostkey.py "$(cat ${container_id}):/etc/ansible/modules/openssh_hostkey.py"'
   - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-galaxy install willshersystems.sshd'
   - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ANSIBLE_LIBRARY=/etc/ansible/modules ansible-playbook -v /etc/ansible/roles/proactcloud.openssh/travis/test.yml --syntax-check'
-  - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ANSIBLE_LIBRARY=/etc/ansible/modules ansible-playbook -v /etc/ansible/roles/proactcloud.openssh/test.yml'
+  - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ANSIBLE_LIBRARY=/etc/ansible/modules ansible-playbook -v /etc/ansible/roles/proactcloud.openssh/travis/test.yml'
   - >
     sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ANSIBLE_LIBRARY=/etc/ansible/modules ansible-playbook -v /etc/ansible/roles/proactcloud.openssh/travis/test.yml
     | grep -q 'changed=0.*failed=0'
