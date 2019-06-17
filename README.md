@@ -10,7 +10,7 @@ Target hosts will need python cryptography installed. This will not automaticall
 
 ## Role Variables
 
-Uses a default config, which can be found in defaults/main.yml. Basically it just provides willshersystems.sshd with some harsh defaults and runs with it.
+Uses a default config, which can be found in `defaults/main.yml`. Basically it just provides `willshersystems.sshd` with some harsh defaults and runs with it.
 
 * `pacopenssh_allow_group`: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
 * `pacopenssh_sshd`: complex hash using the same template as willshersystems.sshd (see there).
@@ -33,7 +33,7 @@ Uses a default config, which can be found in defaults/main.yml. Basically it jus
   MACs: hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
 ```
 
-Please be aware that this config may lockout older clients and will *NOT ALLOW* password-based authentication for anyone. Ensure that SSH Key based Logins are configured and working before deploying on a server!
+Please be aware that this config may lockout older clients and will **NOT ALLOW** password-based authentication for anyone. **Ensure that SSH Key based Logins are configured and working before deploying on a server!**
 
 ## Dependencies
 
