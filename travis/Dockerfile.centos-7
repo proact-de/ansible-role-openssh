@@ -19,7 +19,6 @@ RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
 
 RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 RUN mkdir -p /etc/ansible/modules
-COPY travis/openssh_hostkey.py /etc/ansible/modules/openssh_hostkey.py
 
 VOLUME ["/sys/fs/cgroup"]
 
