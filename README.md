@@ -2,18 +2,18 @@
 
 This role configures and (massively) hardens OpenSSH. This is done by updating hostkeys and sshd_config and ssh_config to best practices layed out by "Secure Secure Shell" (<https://stribika.github.io/2015/01/04/secure-secure-shell.html>).
 
-NOTE: the ssh_config file will simply disable password based authentication for the client! So if you get "Permission denied (password, publickey)" or similar try "ssh -o PasswordAuthetication=yes"
+**NOTE:** the ssh_config file will simply disable password based authentication for the client! So if you get `Permission denied (password, publickey)` or similar try `ssh -o PasswordAuthetication=yes`
 
 ## Requirements
 
-None.
+Target hosts will need python cryptography installed. This will not automatically be done and you will have to do this manually from your playbook.
 
 ## Role Variables
 
 Uses a default config, which can be found in defaults/main.yml. Basically it just provides willshersystems.sshd with some harsh defaults and runs with it.
 
-* pacopenssh_allow_group: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
-* pacopenssh_sshd: complex hash using the same template as willshersystems.sshd (see there).
+* `pacopenssh_allow_group`: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
+* `pacopenssh_sshd`: complex hash using the same template as willshersystems.sshd (see there).
 
  The default configuration is:
 
