@@ -6,10 +6,15 @@
 ###
 
 - name: Include Distro dependent vars
-  include_vars: "{{ item }}"
-  with_items:
-    - "{{ ansible_os_family }}.yml"
-    - "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - distro_default.yml
+      paths:
+        - 'vars'
 
 - name: Include Installation procedures
   include: install.yml
