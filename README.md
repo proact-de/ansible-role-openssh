@@ -2,7 +2,7 @@
 
 This role configures and (massively) hardens OpenSSH. This is done by updating hostkeys and sshd_config and ssh_config to best practices layed out by "Secure Secure Shell" (<https://stribika.github.io/2015/01/04/secure-secure-shell.html>).
 
-**NOTE:** the ssh_config file will simply disable password based authentication for the client! So if you get `Permission denied (password, publickey)` or similar try `ssh -o PasswordAuthetication=yes`
+**NOTE:** the ssh_config file will simply disable password based authentication for the client! So if you get `Permission denied (password, publickey)` or similar try `ssh -o PasswordAuthentication=yes`
 
 ## Requirements
 
