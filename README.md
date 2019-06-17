@@ -1,17 +1,14 @@
-proactcloud.openssh
-==============
+# proactcloud.openssh
 
 This role configures and (massively) hardens OpenSSH. This is done by updating hostkeys and sshd_config and ssh_config to best practices layed out by "Secure Secure Shell" (<https://stribika.github.io/2015/01/04/secure-secure-shell.html>).
 
 NOTE: the ssh_config file will simply disable password based authentication for the client! So if you get "Permission denied (password, publickey)" or similar try "ssh -o PasswordAuthetication=yes"
 
-Requirements
-------------
+## Requirements
 
 None.
 
-Role Variables
---------------
+## Role Variables
 
 Uses a default config, which can be found in defaults/main.yml. Basically it just provides willshersystems.sshd with some harsh defaults and runs with it.
 
@@ -38,29 +35,34 @@ Uses a default config, which can be found in defaults/main.yml. Basically it jus
 
 Please be aware that this config may lockout older clients and will *NOT ALLOW* password-based authentication for anyone. Ensure that SSH Key based Logins are configured and working before deploying on a server!
 
-Dependencies
-------------
+## Dependencies
 
 * willshersystems.sshd (<https://github.com/willshersystems/ansible-sshd>)
 
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Example Playbook
 
 ```yml
 - hosts: servers
   roles:
      - { role: proactcloud.openssh, ssh_allow_group: mysshgrp }
+```
 
-License
--------
+## License
 
-internal
+Copyright 2019 Proact Deutschland GmbH
 
-Author Information
-------------------
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-Patrick Dreker, patrick.dreker@proact.de
-Source Code: Proact Gitlab
-(c) 2017-2018 Proact Deutschland GmbH
+<http://www.apache.org/licenses/LICENSE-2.0>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+## Author Information
+
+Patrick Dreker <patrick.dreker@proact.de>
