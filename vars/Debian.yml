@@ -1,5 +1,5 @@
 ---
-tmxopenssh_conf_dir: /etc/ssh
-tmxopenssh_pycrypto_package: python-cryptography
+pacopenssh_conf_dir: /etc/ssh
+pacopenssh_pycrypto_package: python-cryptography
 root_group: root
-tmxopenssh_service_name: ssh
+pacopenssh_service_name: ssh

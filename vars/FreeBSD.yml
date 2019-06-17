@@ -1,5 +1,5 @@
 ---
-tmxopenssh_conf_dir: /etc/ssh
-tmxopenssh_pycrypto_package: py27-cryptography
+pacopenssh_conf_dir: /etc/ssh
+pacopenssh_pycrypto_package: py27-cryptography
 root_group: wheel
-tmxopenssh_service_name: sshd
+pacopenssh_service_name: sshd

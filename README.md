@@ -12,18 +12,18 @@ None.
 
 Uses a default config, which can be found in defaults/main.yml. Basically it just provides willshersystems.sshd with some harsh defaults and runs with it.
 
-* ssh_allow_group: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
-* tmx_sshd: complex hash using the same template as willshersystems.sshd (see there).
+* pacopenssh_allow_group: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
+* pacopenssh_sshd: complex hash using the same template as willshersystems.sshd (see there).
 
  The default configuration is:
 
  ```yaml
- tmx_sshd:
+ pacopenssh_sshd:
   KexAlgorithms: curve25519-sha256@libssh.org, diffie-hellman-group-exchange-sha256
   Protocol: 2
   HostKey:
-    - "{{ tmxopenssh_conf_dir }}/ssh_host_rsa_key"
-    - "{{ tmxopenssh_conf_dir }}/ssh_host_ed25519_key"
+    - "{{ pacopenssh_conf_dir }}/ssh_host_rsa_key"
+    - "{{ pacopenssh_conf_dir }}/ssh_host_ed25519_key"
   PasswordAuthentication: "no"
   PermitRootLogin: without-password
   ChallengeResponseAuthentication: "no"

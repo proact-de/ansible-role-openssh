@@ -1,7 +1,7 @@
 ---
 - name: Ensure ssh_allow group exists.
   group:
-    name: "{{ tmxopenssh_allow_group }}"
+    name: "{{ pacopenssh_allow_group }}"
     state: present
     system: true
 
@@ -9,7 +9,7 @@
   include_role:
     name: willshersystems.sshd
   vars:
-    sshd: "{{ tmxopenssh_sshd }}"
+    sshd: "{{ pacopenssh_sshd }}"
 
 - name: Disable ECDSA key generation in rc.d/ssh
   lineinfile:
@@ -27,14 +27,14 @@
   openssh_hostkey:
     type: RSA1
     state: absent
-    path: "{{ tmxopenssh_conf_dir }}"
+    path: "{{ pacopenssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
 
 - name: Harden SSHd | remove DSA hostkey.
   openssh_hostkey:
     type: DSA
     state: absent
-    path: "{{ tmxopenssh_conf_dir }}"
+    path: "{{ pacopenssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
 
 - name: Harden SSHd | Enforce 4096 bits RSA hostkey.
@@ -42,14 +42,14 @@
     type: RSA
     size: 4096
     state: present
-    path: "{{ tmxopenssh_conf_dir }}"
+    path: "{{ pacopenssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
 
 - name: Harden SSHd | Enforce 521 bits ECDSA key.
   openssh_hostkey:
     type: ECDSA
     state: absent
-    path: "{{ tmxopenssh_conf_dir }}"
+    path: "{{ pacopenssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
 
 - name: Harden SSHd | Enforce existence of ED25519 hostkey.
@@ -57,12 +57,12 @@
     type: ED25519
     size: 128
     state: present
-    path: "{{ tmxopenssh_conf_dir }}"
+    path: "{{ pacopenssh_conf_dir }}"
   notify: [ 'restart_sshd' ]
 
 - name: Harden SSHd | Deploy large RSA moduli.
   copy:
-    dest: "{{ tmxopenssh_conf_dir }}/moduli"
+    dest: "{{ pacopenssh_conf_dir }}/moduli"
     group: "{{ root_group }}"
     mode: 0644
     owner: root
@@ -74,5 +74,5 @@
     group: "{{ root_group }}"
     mode: 0644
     owner: root
-    dest: "{{ tmxopenssh_conf_dir }}/ssh_config"
+    dest: "{{ pacopenssh_conf_dir }}/ssh_config"
     src: ssh_config.j2

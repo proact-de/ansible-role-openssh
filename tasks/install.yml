@@ -1,7 +1,7 @@
 ---
 - name: Install python-cryptography (anything but Debian8)
   package:
-    name: "{{ tmxopenssh_pycrypto_package }}"
+    name: "{{ pacopenssh_pycrypto_package }}"
     state: present
   when: not (( ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or ( ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"))
 

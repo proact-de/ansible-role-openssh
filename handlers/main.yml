@@ -3,5 +3,5 @@
 # handlers file for proactcloud.LinuxBase
 - name: restart_sshd
   service:
-    name: "{{ tmxopenssh_service_name }}"
+    name: "{{ pacopenssh_service_name }}"
     state: restarted
