@@ -1,7 +1,7 @@
 proactcloud.openssh
 ==============
 
-This role configures and (massively) hardens OpenSSH. This is done by updating hostkeys and sshd_config and ssh_config to best practices layed out by "Secure Secure Shell" (https://stribika.github.io/2015/01/04/secure-secure-shell.html).
+This role configures and (massively) hardens OpenSSH. This is done by updating hostkeys and sshd_config and ssh_config to best practices layed out by "Secure Secure Shell" (<https://stribika.github.io/2015/01/04/secure-secure-shell.html>).
 
 NOTE: the ssh_config file will simply disable password based authentication for the client! So if you get "Permission denied (password, publickey)" or similar try "ssh -o PasswordAuthetication=yes"
 
@@ -14,11 +14,13 @@ Role Variables
 --------------
 
 Uses a default config, which can be found in defaults/main.yml. Basically it just provides willshersystems.sshd with some harsh defaults and runs with it.
-  * ssh_allow_group: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
-  * tmx_sshd: complex hash using the same template as willshersystems.sshd (see there).
+
+* ssh_allow_group: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
+* tmx_sshd: complex hash using the same template as willshersystems.sshd (see there).
 
  The default configuration is:
- ```
+
+ ```yaml
  tmx_sshd:
   KexAlgorithms: curve25519-sha256@libssh.org, diffie-hellman-group-exchange-sha256
   Protocol: 2
@@ -39,16 +41,17 @@ Please be aware that this config may lockout older clients and will *NOT ALLOW* 
 Dependencies
 ------------
 
-  * willshersystems.sshd (https://github.com/willshersystems/ansible-sshd)
+* willshersystems.sshd (<https://github.com/willshersystems/ansible-sshd>)
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: proactcloud.openssh, ssh_allow_group: mysshgrp }
+```yml
+- hosts: servers
+  roles:
+     - { role: proactcloud.openssh, ssh_allow_group: mysshgrp }
 
 License
 -------
