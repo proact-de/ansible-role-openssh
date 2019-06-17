@@ -5,7 +5,7 @@
     state: present
     system: true
 
-- name: Setup SSHd config (mattwillsher.sshd role)
+- name: Setup SSHd config (willshersystems.sshd role)
   include_role:
     name: willshersystems.sshd
   vars:
