@@ -4,9 +4,11 @@ This role configures and (massively) hardens OpenSSH. This is done by updating h
 
 **NOTE:** the ssh_config file will simply disable password based authentication for the client! So if you get `Permission denied (password, publickey)` or similar try `ssh -o PasswordAuthentication=yes`
 
-## Requirements
+## Limitations / Caveat
 
-Target hosts will need python cryptography installed. This will not automatically be done and you will have to do this manually from your playbook.
+To manipulate OpenSSH hostkeys we need the python cryptography module installed. Unfortunately on Ubuntu 14.04/16.04 the packaged version is too old (1.2.3) or simply unavailable, and so is not able to output OpenSSH compatible keys. This role will install the most up-to-date version from pip. This *may* adversely affect other software relying on python cryptography, so in that case you may want to correct this afterwards, by remove the pip version (`pip uninstall cryptography`) and reinstalling the packaged version (`apt-get install --reinstall  python-cryptography`).
+
+As CentOS (and probably other RedHat based distributions) unconditionally regenerate all possible host keys we will not remove the ECDSA host key, but rather enforce it to 521 bits.
 
 ## Role Variables
 
