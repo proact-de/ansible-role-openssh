@@ -1,20 +1,26 @@
 ---
-- name: Install python-cryptography from packages (not on Debian8 / Ubuntu 16.04)
+- name: Install python-cryptography from packages (not on Debian8 / Ubuntu 16.04 / Ubuntu 14.04)
   package:
     name: "{{ pacopenssh_pycrypto_package }}"
     state: present
-  when: not (( ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or ( ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"))
+  when: not ((ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04") or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04"))
 
-- name: Install required packages required for build of python-cryptography (Debian8 / Ubuntu 16.04)
+- name: Install required packages required for build of python-cryptography (Debian8 / Ubuntu 16.04 / Ubuntu 14.04)
   package:
     name: "{{ item }}"
     state: present
-  when: (( ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or ( ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"))
+  when: ((ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04") or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04"))
   with_items:
     - python-setuptools
     - build-essential
     - libssl-dev
     - python-dev
+
+- name: Install additional build dependency for python-cryptography (Ubuntu 14.04)
+  package:
+    name: libffi-dev
+    state: present
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04")
 
 - name: Install PIP (easy_install) (Debian8)
   command: /usr/bin/easy_install pip
@@ -22,14 +28,21 @@
     creates: /usr/local/bin/pip
   when: ansible_distribution == "Debian" and ansible_distribution_major_version == "8"
 
-- name: Install python-pip (Ubuntu 16.04)
+- name: Install python-pip (Ubuntu 16.04 / Ubuntu 14.04)
   package:
     name: python-pip
     state: present
-  when: (( ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or ( ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"))
+  when: ((ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04")  or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04"))
 
 - name: Install latest (python-)cryptography from pip (Debian8 / Ubuntu 16.04)
   pip:
     name: cryptography
     state: latest
-  when: (( ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or ( ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"))
+  when: ((ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"))
+
+- name: Install (python-)cryptography 2.0.3 from pip (Ubuntu 14.04)
+  pip:
+    name: cryptography
+    version: 2.0.3
+    state: present
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04")
