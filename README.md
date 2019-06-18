@@ -68,3 +68,5 @@ limitations under the License.
 ## Author Information
 
 Patrick Dreker <patrick.dreker@proact.de>
+
+[![Build Status (master)](https://travis-ci.org/proact-de/ansible-role-openssh.svg?branch=master)](https://travis-ci.org/proact-de/ansible-role-openssh)
