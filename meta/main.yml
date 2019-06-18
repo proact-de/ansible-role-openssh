@@ -25,8 +25,16 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
+      - 14.04
       - 16.04
       - 18.04
+  - name: CentOS
+    versions:
+      - 7
+  - name: Debian
+    versions:
+      - jessie
+      - stretch
 
   galaxy_tags:
     - openssh
