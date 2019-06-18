@@ -22,17 +22,25 @@
     state: present
   when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04")
 
-- name: Install PIP (easy_install) (Debian8)
-  command: /usr/bin/easy_install pip
-  args:
-    creates: /usr/local/bin/pip
-  when: ansible_distribution == "Debian" and ansible_distribution_major_version == "8"
-
-- name: Install python-pip (Ubuntu 16.04 / Ubuntu 14.04)
+- name: Install python-pip (Ubuntu 16.04 / Ubuntu 14.04 / Debian 8)
   package:
     name: python-pip
     state: present
   when: ((ansible_distribution == "Debian" and ansible_distribution_major_version == "8") or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04")  or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04"))
+  register: pkg_pip
+  changed_when: pkg_pip.changed and ((ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04")  or (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04"))
+
+- name: Update pip from pip using packaged pip (Debian 8)
+  pip:
+    name: pip
+    state: latest
+  when: (ansible_distribution == "Debian" and ansible_distribution_major_version == "8")
+
+- name: Remove packaged pip to use updated pip (Debian 8)
+  package:
+    name: python-pip
+    state: absent
+  changed_when: false
 
 - name: Install latest (python-)cryptography from pip (Debian8 / Ubuntu 16.04)
   pip:
