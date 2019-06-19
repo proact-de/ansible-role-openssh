@@ -39,6 +39,7 @@ Please be aware that this config may lockout older clients and will **NOT ALLOW*
 
 ## Dependencies
 
+* Ansible Module openssh_hostkey (<https://github.com/proact-de/ansible-module-opensshhostkeys>)
 * willshersystems.sshd (<https://github.com/willshersystems/ansible-sshd>)
 
 ## Example Playbook
