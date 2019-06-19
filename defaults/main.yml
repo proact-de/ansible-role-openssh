@@ -3,7 +3,7 @@
 pacopenssh_allow_group: ssh_allow
 pacopenssh_allow_group_users:
   - root
-  - "{{ ansible_user }}"
+  - "{{ ansible_facts['ansible_user_id'] }}"
 pacopenssh_safety_ping: true
 
 pacopenssh_sshd:

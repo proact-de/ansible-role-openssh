@@ -19,7 +19,7 @@
     append: yes
   loop:
     - root
-    - "{{ ansible_user }}"
+    - "{{ ansible_facts['ansible_user_id'] }}"
   when: pacopenssh_safety_pin | bool
 
 - name: Setup SSHd config (willshersystems.sshd role)
