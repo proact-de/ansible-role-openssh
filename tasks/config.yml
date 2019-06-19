@@ -10,7 +10,7 @@
     name: "{{ item }}"
     groups: "{{ pacopenssh_allow_group }}"
     append: yes
-  loop: pacopenssh_allow_group_users
+  loop: "{{ pacopenssh_allow_group_users }}"
 
 - name: Add current ansible user and root to SSH allow group (safety pin)
   user:
