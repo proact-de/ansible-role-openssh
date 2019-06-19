@@ -8,7 +8,7 @@
 - name: Get SSH username
   become: no
   set_fact:
-    pac_sshuser: "{{ lookup('env', 'USER' }}"
+    pac_sshuser: "{{ lookup('env', 'USER') }}"
 
 - name: Ensure users are in SSH allow group
   user:
