@@ -1,6 +1,10 @@
 ---
 # defaults file for proactcloud.openssh
 pacopenssh_allow_group: ssh_allow
+pacopenssh_allow_group_users:
+  - root
+  - "{{ ansible_user }}"
+pacopenssh_safety_ping: true
 
 pacopenssh_sshd:
   KexAlgorithms: curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256

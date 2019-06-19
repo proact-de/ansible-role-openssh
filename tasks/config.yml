@@ -1,9 +1,26 @@
 ---
-- name: Ensure ssh_allow group exists.
+- name: Ensure SSH allow group exists.
   group:
     name: "{{ pacopenssh_allow_group }}"
     state: present
     system: true
+
+- name: Ensure users are in SSH allow group
+  user:
+    name: "{{ item }}"
+    groups: "{{ pacopenssh_allow_group }}"
+    append: yes
+  loop: pacopenssh_allow_group_users
+
+- name: Add current ansible user and root to SSH allow group (safety pin)
+  user:
+    name: "{{ item }}"
+    groups: "{{ pacopenssh_allow_group }}"
+    append: yes
+  loop:
+    - root
+    - "{{ ansible_user }}"
+  when: pacopenssh_safety_pin | bool
 
 - name: Setup SSHd config (willshersystems.sshd role)
   include_role:
