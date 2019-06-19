@@ -15,8 +15,8 @@ As CentOS (and probably other RedHat based distributions) unconditionally regene
 Uses a default config, which can be found in `defaults/main.yml`. Basically it just provides `willshersystems.sshd` with some harsh defaults and runs with it.
 
 * `pacopenssh_allow_group`: define a group, which will be allowed to login using ssh. This group will be created, when it doesn't exist. Default: ssh_allow
-* `pacopenssh_allow_group_users`: a list of users, who will be put into the group specified by `pacopenssh_allow_group`. This can be used to ensure you do not lock yourself out of the system. Default: `[ root, {{ ansible_user }} ]`
-* `pacopenssh_safety_pin`: Defaults to `true`. If this is `true` the `ansible_user` will **always** be put into the group specified by `pacopenssh_allow_group`. This should avoid completely locking you out of a system. If you set this to `false` you may end up with no access to the system.
+* `pacopenssh_allow_group_users`: a list of users, who will be put into the group specified by `pacopenssh_allow_group`. This can be used to ensure you do not lock yourself out of the system. Default: `[ root ]`
+* `pacopenssh_safety_pin`: Defaults to `true`. If this is `true` the `root` user will **always** be put into the group specified by `pacopenssh_allow_group`. This should avoid completely locking you out of a system. If you set this to `false` you may end up with no access to the system.
 * `pacopenssh_sshd`: complex hash using the same template as willshersystems.sshd (see there).
 
  The default configuration is:

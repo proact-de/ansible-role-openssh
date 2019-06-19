@@ -5,11 +5,6 @@
     state: present
     system: true
 
-- name: Get SSH username
-  become: no
-  set_fact:
-    pac_sshuser: "{{ lookup('env', 'USER') }}"
-
 - name: Ensure users are in SSH allow group
   user:
     name: "{{ item }}"
@@ -19,12 +14,9 @@
 
 - name: Add current ansible user and root to SSH allow group (safety pin)
   user:
-    name: "{{ item }}"
+    name: root
     groups: "{{ pacopenssh_allow_group }}"
     append: yes
-  loop:
-    - root
-    - "{{ pac_sshuser }}"
   when: pacopenssh_safety_pin | bool
 
 - name: Setup SSHd config (willshersystems.sshd role)
